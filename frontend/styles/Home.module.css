@@ -97,7 +97,7 @@
   transition: color 0.15s ease, border-color 0.15s ease;
   min-width: 300px;
   min-height: 220px;
-  background-color: #61CE70;
+  background-color: #24FEB7;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,7 +115,7 @@
 .card h2 {
   margin: 0 0 1rem 0;
   font-size: 1.6rem;
-  color: #FFF;
+  color: #010f25;
   font-weight: 900;
   font-family: 'Outfit', sans-serif;
 }
@@ -133,12 +133,12 @@
 
 .create_form {
   margin: 0 auto;
-  width: 40%;
+  width: 35%;
   margin-top: 100px;
 }
 
 .create_form h3 {
-  color: #61CE70;
+  color: #24FEB7;
   font-family: 'Noto Sans', sans-serif;
 }
 

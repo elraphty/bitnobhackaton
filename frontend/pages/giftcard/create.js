@@ -59,7 +59,8 @@ export default function Home() {
                 loading={loading}
                 primary
                 style={{
-                  backgroundColor: '#61CE70',
+                  backgroundColor: '#24FEB7',
+                  color: '#010f25',
                 }}>
                 Create!
               </Button>
