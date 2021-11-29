@@ -131,6 +131,17 @@
   margin-left: 0.5rem;
 }
 
+.create_form {
+  margin: 0 auto;
+  width: 40%;
+  margin-top: 100px;
+}
+
+.create_form h3 {
+  color: #61CE70;
+  font-family: 'Noto Sans', sans-serif;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;

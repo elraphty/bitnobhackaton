@@ -21,14 +21,14 @@ export default function Home() {
 
         <section className={styles.main_content}>
           <div className={styles.card_wrap}>
-            <Link href="/giftcards/create">
+            <Link href="/giftcard/create">
               <a>
                 <div className={styles.card}>
                   <h2>Create Bitcoin Giftcard</h2>
                 </div>
               </a>
             </Link>
-            <Link href="/giftcards/claim">
+            <Link href="/giftcard/claim">
               <a>
                 <div className={styles.card}>
                   <h2>Claim Bitcoin Giftcard</h2>
