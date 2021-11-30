@@ -142,6 +142,24 @@
   font-family: 'Noto Sans', sans-serif;
 }
 
+.form_field {
+  color: #FFF;
+}
+
+.form_field label {
+  color: #FFF !important;
+  font-size: 1.1rem !important;
+  padding: 5px 0px;
+  font-family: 'Noto Sans', sans-serif !important;
+  font-size: 1.1rem;
+}
+
+#form_button {
+  background-color: #24FEB7;
+  color: #010f25;
+  margin-top: 50px;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;

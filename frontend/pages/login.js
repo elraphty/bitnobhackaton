@@ -1,6 +1,6 @@
-import Layout from '../../components/Layout';
+import Layout from '../components/Layout';
 import Head from 'next/head';
-import styles from '../../styles/Home.module.css';
+import styles from '../styles/Home.module.css';
 import { Form, Button, Input, Message } from 'semantic-ui-react';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
@@ -8,7 +8,8 @@ import { useRouter } from 'next/router';
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const [value, setValue] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const router = useRouter();
 
@@ -34,35 +35,37 @@ export default function Login() {
       </Head>
       <Layout>
         <section className={styles.index_paragraph}>
-          <p>
-            Create a giftcard by inputing the amount of Bitcoin you want to gift
-            out
-          </p>
+          <p>Enter your email and password to sign in</p>
         </section>
 
         <section className={styles.create_form}>
-          <h3>Signup</h3>
+          <h3>Login</h3>
           <Form onSubmit={onSubmit} error={!!errorMessage}>
-            <Form.Field>
-              <label>Minimum Contribution</label>
+            <Form.Field className={styles.form_field}>
+              <label className={styles.label}>Email</label>
               <Input
-                label="BTC"
-                labelPosition="right"
-                value={value}
-                type="number"
-                onChange={(event) => setValue(event.target.value)}
+                value={email}
+                type="email"
+                placeholder="Enter email"
+                onChange={(event) => setEmail(event.target.value)}
               />
             </Form.Field>
             <Message error header="Oops!" content={errorMessage} />
+
+            <Form.Field className={styles.form_field}>
+              <label className={styles.label}>Password</label>
+              <Input
+                value={password}
+                type="password"
+                placeholder="Enter password"
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </Form.Field>
+            <Message error header="Oops!" content={errorMessage} />
+
             <center>
-              <Button
-                loading={loading}
-                primary
-                style={{
-                  backgroundColor: '#24FEB7',
-                  color: '#010f25',
-                }}>
-                Signup!
+              <Button loading={loading} primary id={styles.form_button}>
+                Login!
               </Button>
             </center>
           </Form>
