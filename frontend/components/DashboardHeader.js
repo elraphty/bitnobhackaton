@@ -1,7 +1,7 @@
-import styles from '../styles/Home.module.css';
+import styles from '../styles/dashboard.module.css';
 import Link from 'next/link';
 
-export default function Header(props) {
+export default function DashboardHeader(props) {
   return (
     <Link href="/">
         <a>

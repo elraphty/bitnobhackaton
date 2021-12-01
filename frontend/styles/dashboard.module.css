@@ -1,0 +1,18 @@
+.main {
+  min-height: 100vh;
+  background-color: #FFF;
+  padding: 0;
+}
+
+.main_logo {
+  color: #010f25;
+  text-align: left;
+  font-size: 1.6rem;
+  font-family: 'Noto Sans', sans-serif;
+  padding: 5px 0px;
+}
+
+.sidebar_pushable {
+  height: 100vh;
+  padding: 0;
+}
