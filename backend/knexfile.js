@@ -7,8 +7,10 @@ module.exports = {
     connection: {
       host: process.env.DB_HOST_DEV,
       user: process.env.DB_USER_DEV,
+      port: 5432,
       password: process.env.DB_PASS_DEV,
       database: process.env.DB_NAME_DEV,
+      charset: 'utf8'
     },
     migrations: {
       directory: path.join(__dirname, '/db/migrations'),

@@ -4,6 +4,8 @@ exports.up = function (knex) {
     t.string('email').unique().notNullable();
     t.string('password').notNullable();
     t.string('name').notNullable();
+    t.string('phone').notNullable();
+    t.string('customer_id');
     t.enum('user_type', ['user', 'admin'])
       .notNullable()
       .defaultTo('user');

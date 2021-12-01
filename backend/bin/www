@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('../src/app');
 var debug = require('debug')('backend:server');
 var http = require('http');
 
@@ -43,6 +43,7 @@ function normalizePort(val) {
 
   if (port >= 0) {
     // port number
+    console.log(port);
     return port;
   }
 
