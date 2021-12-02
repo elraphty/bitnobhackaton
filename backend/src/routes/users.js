@@ -9,6 +9,7 @@ const environment = process.env.NODE_ENV || 'development';
 const configuration = require('../../knexfile')[environment];
 const database = require('knex')(configuration);
 const {validationResult } = require('express-validator');
+const { response } = require('express');
 
 const SECRET = process.env.JWT_SECRET;
 /* GET users listing. */
@@ -25,18 +26,29 @@ router.post("/register",validate.signupValidation, async (req, res, next) => {
       return res.status(400).json({ errors: errors.array() });
     }
      const password= await bcrypt.hash( req.body.password, 10);
-     return database("users").insert({
-        name: req.body.name,
-        email: req.body.email,
-        phone: req.body.phone,
-        password: password,
-     })
-     .then(users => {
-        res.json({"data":"user registerde"})
-      //   service.CreateCustomer(req.body.name,req.body.email,req.body.phone)
-     })
-     .catch(error => res.status(400).json({"err":error.detail}));
-   
+     service.CreateCustomer(req.body.name,req.body.email,req.body.phone).then(res =>res.json())
+     .then(json => {
+
+      if (json.status === 200){
+         const users= database("users").insert({
+            name: req.body.name,
+            email: req.body.email,
+            phone: req.body.phone,
+            password: password,
+            customer_id: json.data['id']
+         });
+         if (!users){
+          res.status(400).json({"err":error.detail});
+         }else{
+            console.log(users);
+          res.json({"data":"user registered"})
+         
+         }
+     }else{
+      res.status(400).json({"err":"customer already exist"});
+   } }).catch(err => console.log(err)); 
+     
+    
  
   
          

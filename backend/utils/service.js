@@ -1,42 +1,37 @@
-const { response } = require('express');
-
+const fetch = require('node-fetch');
 require('dotenv').config();
 
-const request= (url,method,data)=>{
-    fetch(url, {
-    method: method, 
-    mode: 'cors', 
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.API_KEY}`,
-    },
+
+
+  
+
+const instance = async (url,method,data)=>{
+  return await fetch(process.env.base_URL+url, {
+    method: method,
     body: JSON.stringify(data),
-  });
-  return response;
+    headers: { 'Content-Type': 'application/json', "Authorization":`Bearer ${process.env.API_KEY}` }
+})
 }
 
 
 
 
-const CreateCustomer=(name,email,phone)=>{
+const CreateCustomer=  async(name,email,phone)=>{
 
-    payload = {
+    payload = { 
 
         "email": email,
     
         "firstName": name.split(' ')[0],
     
-        "lastName": name.split(' ')[0],
+        "lastName": name.split(' ')[1],
     
         "phone":phone,
     
         "countryCode": "+234"
     
     }
- request(`process.env.URL${'customer'}`,'POST',payload)
-  .then(response => response.json()).catch(error => next(error))
-
-
+ return instance('customers',"POST",payload)
 }
 
 
