@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const {
     listBusinessAddresses,
     listBusinessTransactions,
@@ -7,7 +7,6 @@ const {
 } = require('../controllers/shop')
 
 
-/* GET home page. */
 router.get('/listbusinessaddresses', listBusinessAddresses);
 router.get('/listbusinesstransactions', listBusinessTransactions);
 router.get('/sendbtctobusiness', sendBTCtoBusiness);
