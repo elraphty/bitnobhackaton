@@ -1,21 +1,21 @@
 const fetch = require('node-fetch');
 const sdk = require('bitnob');
+require('dotenv').config();
 
 function listBusinessAddresses() {
-
-    sdk['list-addresses']({Authorization: 'Bearer API-KEY'})
+    sdk['list-addresses']({Authorization: `Bearer ${process.env.API_KEY}`})
      .then(res => console.log(res))
      .catch(err => console.error(err));
 }
 
-function listBusinessTransactions() {
-
-    const url = 'https://sandboxapi.bitnob.co/api/v1/transactions/?order=ASC&page=2&take=10';
+function listBusinessTransactions(req, res) {
+    const customerID = req.headers.userid_id
+    const url = process.env.baseUrl + '/transactions/' + customerID;
     const options = {
         method: 'GET',
         headers: {
             Accept: 'application/json', 
-            Authorization: 'Bearer API-KEY'
+            Authorization: process.env.APIKEY
         }
     };
 
@@ -27,7 +27,7 @@ function listBusinessTransactions() {
 
 function sendBTCtoBusiness(req, res) {
 
-    ( satoshis, address, customerEmail ) = req.body
+   const  {satoshis, address, customerEmail }=req.body
 
     sdk['send-bitcoin']({
      satoshis: satoshis,
@@ -35,7 +35,7 @@ function sendBTCtoBusiness(req, res) {
      customerEmail: customerEmail,
      priorityLevel: 'regular'
     }, 
-    {Authorization: 'Bearer API-KEY'})
+    {Authorization: `Bearer ${process.env.API_KEY}`})
     .then(res => console.log(res))
     .catch(err => console.error(err));
 }
