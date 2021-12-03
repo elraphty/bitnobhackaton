@@ -8,7 +8,7 @@ const bodyParser = require("body-parser")
 
 const shopRouter = require('./routes/shops');
 const usersRouter = require('./routes/users');
-const giftcardRouter = require('./routes/giftcard');
+const giftcardRouter = require('./routes/giftcards');
 
 
 const app = express();
@@ -22,8 +22,8 @@ app.use(bodyParser.json())
 
 
 app.use('/', shopRouter);
+app.use('/giftcards', giftcardRouter);
 app.use('/users', usersRouter);
-app.use('/giftcard', giftcardRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

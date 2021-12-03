@@ -2,23 +2,56 @@ import Layout from '../../components/Layout';
 import Head from 'next/head';
 import styles from '../../styles/Home.module.css';
 import { Form, Button, Input, Message } from 'semantic-ui-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import axios from 'axios';
+import { BASE_URL } from '../../config';
 
 export default function Home() {
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState('');
+  const [token, setToken] = useState('');
+
+
+  useEffect(() => {
+    getToken();
+  }, []);
+
+  const getToken = async () => {
+    const token = await localStorage.getItem('TOKEN');
+    setToken(token);
+  };
+  
 
   const router = useRouter();
 
   const onSubmit = async (event) => {
     event.preventDefault();
+
     setLoading(true);
     setErrorMessage('');
 
+    if(value === '') {
+      setErrorMessage('Please enter bitcoin amount');
+    } else {
+      setErrorMessage('');
+    }
+
     try {
-      router.push('/');
+      const body = {
+        amount: Number(value)
+      };
+
+      await axios.post(`${BASE_URL}giftcards`, body, {
+        headers: {
+          Authorization: `BEARER ${token}`,
+        }
+      });
+
+      setSuccessMessage('Successfully created giftcard');
+      setValue('');
     } catch (err) {
       setErrorMessage(err.message);
     }
@@ -54,6 +87,7 @@ export default function Home() {
               />
             </Form.Field>
             <Message error header="Oops!" content={errorMessage} />
+            <Message success header="Success!" content={successMessage} />
             <center>
               <Button
                 loading={loading}

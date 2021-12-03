@@ -1,5 +1,5 @@
 exports.up = function (knex) {
-    return knex.schema.createTable('gitfcard_balance', (t) => {
+    return knex.schema.createTable('giftcard_balance', (t) => {
       t.increments('id').primary().notNullable();
       t.integer('user_id').notNullable().references('id').inTable('users');
       t.float('balance').notNullable();

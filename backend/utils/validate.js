@@ -14,3 +14,8 @@ exports.loginValidation = [
 exports.giftcardValidation = [
     body('amount', 'Please a valid bitcoin amount').isNumeric().isLength({ min: 1 })
 ]
+
+exports.giftcardClaimValidation = [
+    body('amount', 'Please a valid bitcoin amount').isNumeric().isLength({ min: 1 }),
+    body('code', 'Please send a valid giftcard code').isString().isLength({ min: 8 })
+]

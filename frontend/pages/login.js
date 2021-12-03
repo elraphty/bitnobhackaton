@@ -2,10 +2,11 @@ import Layout from '../components/Layout';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { Form, Button, Input, Message } from 'semantic-ui-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from  'axios';
 import {BASE_URL} from '../config';
+import { checkLogin } from '../config';
 
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState('');
@@ -15,6 +16,12 @@ export default function Login() {
   const [password, setPassword] = useState('');
 
   const router = useRouter();
+
+  useEffect(async () =>  {
+    if(await checkLogin())  {
+      router.push('/');
+    }
+  }, []);
 
   const onSubmit = async (event) => {
     event.preventDefault();

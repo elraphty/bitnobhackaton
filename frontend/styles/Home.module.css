@@ -9,11 +9,34 @@
   background-color: #010f25;
 }
 
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 15px;
+}
+
 .main_logo {
   color: #FFF;
   text-align: left;
   font-size: 1.9rem;
   font-family: 'Noto Sans', sans-serif;
+}
+
+.header_right {
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header_button {
+  background-color: #24FEB7 !important;
+  color: #010f25 !important;
+}
+
+.header_button_margin {
+  margin-right: 10px;
 }
 
 .index_paragraph {
