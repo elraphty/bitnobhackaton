@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-uuid = require('uuidv4')
-const {createGiftcard} = require('../controllers/giftcard')
+const {createGiftcard} = require('../controllers/giftcard');
+const {verify} = require('../../utils/jwt');
+const validate = require('../../utils/validate');
 
-router.post('/creategiftcard', createGiftcard);
+router.post('/creategiftcard', verify, validate.giftcardValidation, createGiftcard);
 
 module.exports = router;
