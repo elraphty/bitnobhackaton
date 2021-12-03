@@ -74,7 +74,7 @@ router.post("/login", validate.loginValidation,async (req, res, next) => {
     }
  const user=  await database("users").where({email:req.body.email}).first()
      if(!user){
-        response.status(401).json({
+        res.status(401).json({
            error: "No user by that name"
         })
      }else{
