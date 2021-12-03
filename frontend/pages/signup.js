@@ -4,12 +4,15 @@ import styles from '../styles/Home.module.css';
 import { Form, Button, Input, Message } from 'semantic-ui-react';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import axios from 'axios';
+import { BASE_URL } from '../config';
 
 export default function Signup() {
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
 
   const router = useRouter();
@@ -19,12 +22,30 @@ export default function Signup() {
     setLoading(true);
     setErrorMessage('');
 
+    if (name === '' || email === '' || phone === '' || password === '') {
+      setErrorMessage('Please enter all fields');
+    } else {
+      setErrorMessage('');
+    }
+
     try {
-      router.push('/');
+      const body = {
+        name,
+        email,
+        phone,
+        password,
+      };
+      const response = await axios.post(`${BASE_URL}users/register`, body);
+
+      if (response.status === 200) {
+        setLoading(false);
+
+        router.push('/login');
+      }
     } catch (err) {
+      setLoading(false);
       setErrorMessage(err.message);
     }
-    setLoading(false);
   };
 
   return (
@@ -48,10 +69,11 @@ export default function Signup() {
                 value={name}
                 type="text"
                 placeholder="Enter name"
+                required
+                autocomplete={false}
                 onChange={(event) => setName(event.target.value)}
               />
             </Form.Field>
-            <Message error header="Oops!" content={errorMessage} />
 
             <Form.Field className={styles.form_field}>
               <label className={styles.label}>Email</label>
@@ -59,10 +81,23 @@ export default function Signup() {
                 value={email}
                 type="email"
                 placeholder="Enter email"
+                required
+                autocomplete={false}
                 onChange={(event) => setEmail(event.target.value)}
               />
             </Form.Field>
-            <Message error header="Oops!" content={errorMessage} />
+
+            <Form.Field className={styles.form_field}>
+              <label className={styles.label}>Phone</label>
+              <Input
+                value={phone}
+                type="tel"
+                placeholder="Enter phone"
+                required
+                autocomplete={false}
+                onChange={(event) => setPhone(event.target.value)}
+              />
+            </Form.Field>
 
             <Form.Field className={styles.form_field}>
               <label className={styles.label}>Password</label>
@@ -70,6 +105,8 @@ export default function Signup() {
                 value={password}
                 type="password"
                 placeholder="Enter password"
+                required
+                autocomplete={false}
                 onChange={(event) => setPassword(event.target.value)}
               />
             </Form.Field>

@@ -4,9 +4,12 @@ import styles from '../styles/Home.module.css';
 import { Form, Button, Input, Message } from 'semantic-ui-react';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import axios from  'axios';
+import {BASE_URL} from '../config';
 
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,9 +21,29 @@ export default function Login() {
     setLoading(true);
     setErrorMessage('');
 
+    if(email === '' || password === '') {
+      setErrorMessage('Please enter your email and password');
+    } else {
+      setErrorMessage('');
+    }
+
     try {
-      router.push('/');
+      const body = {
+        email,
+        password
+      };
+
+      const response = await axios.post(`${BASE_URL}users/login`, body);
+      if(response.data.token) {
+        setSuccessMessage('Successfully Logged in');
+        localStorage.setItem('TOKEN', response.data.token);
+
+        setTimeout(() => {
+          router.push('/dashboard');
+        }, 2000);
+      }
     } catch (err) {
+      setLoading(false);
       setErrorMessage(err.message);
     }
     setLoading(false);
@@ -50,7 +73,6 @@ export default function Login() {
                 onChange={(event) => setEmail(event.target.value)}
               />
             </Form.Field>
-            <Message error header="Oops!" content={errorMessage} />
 
             <Form.Field className={styles.form_field}>
               <label className={styles.label}>Password</label>
@@ -61,8 +83,8 @@ export default function Login() {
                 onChange={(event) => setPassword(event.target.value)}
               />
             </Form.Field>
-            <Message error header="Oops!" content={errorMessage} />
-
+            {errorMessage ? (<Message error header="Oops!" content={errorMessage} />) : null}
+            {successMessage ? (<Message success header="Success!" content={successMessage} />) : null}
             <center>
               <Button loading={loading} primary id={styles.form_button}>
                 Login!
