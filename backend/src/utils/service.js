@@ -34,15 +34,5 @@ const CreateCustomer=  async(name,email,phone)=>{
  return instance('customers',"POST",payload)
 }
 
-const CreateCustomerBitcoin=  async(email)=>{
-
-  payload = { 
-
-      "label": "customer wallet",
-      "customerEmail": email
-  }
-return instance('addresses/generate ',"POST",payload)
-}
-
 
 module.exports={CreateCustomer};

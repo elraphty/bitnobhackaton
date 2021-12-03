@@ -17,6 +17,11 @@
     semver "^7.3.5"
     tar "^6.1.11"
 
+"@types/uuid@8.3.1":
+  version "8.3.1"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-8.3.1.tgz#1a32969cf8f0364b3d8c8af9cc3555b7805df14f"
+  integrity sha512-Y2mHTRAbqfFkpjldbkHGY8JIzRN6XqYRliG8/24FcHm2D2PwW24fl5xMRTVGdrb7iMrwCaIEbLWerGIkXuFWVg==
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -96,6 +101,13 @@ asap@~1.0.0:
   resolved "https://registry.yarnpkg.com/asap/-/asap-1.0.0.tgz#b2a45da5fdfa20b0496fc3768cc27c12fa916a7d"
   integrity sha1-sqRdpf36ILBJb8N2jMJ8EvqRan0=
 
+axios@^0.21.4:
+  version "0.21.4"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
+  integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
+  dependencies:
+    follow-redirects "^1.14.0"
+
 axios@^0.24.0:
   version "0.24.0"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.24.0.tgz#804e6fa1e4b9c5288501dd9dff56a7a0940d20d6"
@@ -122,6 +134,14 @@ bcrypt@^5.0.1:
   dependencies:
     "@mapbox/node-pre-gyp" "^1.0.0"
     node-addon-api "^3.1.0"
+
+bitnob@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/bitnob/-/bitnob-1.0.2.tgz#dd7ab1a04cfb10fae1aafdc702368f3eba0682c7"
+  integrity sha512-N+9VdS4PuGNpuxLIJnvJjSnei0GMLxJBjCUlFYz8RJaQAqb2qorBJEAet9V6a95V/WB1rzI1mly1rFuF2nUbCg==
+  dependencies:
+    axios "^0.21.4"
+    dotenv "^10.0.0"
 
 body-parser@1.18.3:
   version "1.18.3"
@@ -476,7 +496,7 @@ finalhandler@1.1.1:
     statuses "~1.4.0"
     unpipe "~1.0.0"
 
-follow-redirects@^1.14.4:
+follow-redirects@^1.14.0, follow-redirects@^1.14.4:
   version "1.14.5"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.5.tgz#f09a5848981d3c772b5392309778523f8d85c381"
   integrity sha512-wtphSXy7d4/OR+MvIFbCVBDzZ5520qV8XfPklSN5QtxuMUJZ+b0Wnst1e1lCDocfzuCkHqj8k0FpZqO+UIaKNA==
@@ -1398,6 +1418,19 @@ utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
+
+uuid@8.3.2:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
+  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+
+uuidv4@^6.2.12:
+  version "6.2.12"
+  resolved "https://registry.yarnpkg.com/uuidv4/-/uuidv4-6.2.12.tgz#e8c1d1d733c3fa4963d4610b8a3a09b4ec58ca96"
+  integrity sha512-UnN4ThIYWhv3ZUE8UwDnnCvh4JafCNu+sQkxmLyjCVwK3rjLfkg3DYiEv6oCMDIAIVEDP4INg4kX/C5hKaRzZA==
+  dependencies:
+    "@types/uuid" "8.3.1"
+    uuid "8.3.2"
 
 validator@^13.6.0:
   version "13.7.0"

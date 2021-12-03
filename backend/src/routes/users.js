@@ -26,7 +26,7 @@ router.post("/register",validate.signupValidation, async (req, res, next) => {
       return res.status(400).json({ errors: errors.array() });
     }
      const password= await bcrypt.hash( req.body.password, 10);
-     service.CreateCustomer(req.body.name,req.body.email,req.body.phone).then(res =>res.json())
+     service.CreateCustomer(req.body.name,req.body.email,req.body.phone).then(res => res.json())
      .then(json => {
 
       if (json.status === 200){
