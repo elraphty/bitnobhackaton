@@ -27,10 +27,10 @@ router.post("/register",validate.signupValidation, async (req, res, next) => {
     }
      const password= await bcrypt.hash( req.body.password, 10);
      service.CreateCustomer(req.body.name,req.body.email,req.body.phone).then(res => res.json())
-     .then(json => {
+     .then(async json => {
 
-      if (json.status === 200){
-         const users= database("users").insert({
+      if (json.status){
+         const users = await database("users").insert({
             name: req.body.name,
             email: req.body.email,
             phone: req.body.phone,
@@ -47,10 +47,6 @@ router.post("/register",validate.signupValidation, async (req, res, next) => {
      }else{
       res.status(400).json({"err":"customer already exist"});
    } }).catch(err => console.log(err)); 
-     
-    
- 
-  
          
 })
 
