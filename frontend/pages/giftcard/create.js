@@ -52,6 +52,7 @@ export default function Home() {
 
       setSuccessMessage('Successfully created giftcard');
       setValue('');
+      setLoading(false);
     } catch (err) {
       setErrorMessage(err.message);
     }
@@ -68,8 +69,7 @@ export default function Home() {
       <Layout>
         <section className={styles.index_paragraph}>
           <p>
-            Create a giftcard by inputing the amount of Bitcoin you want to gift
-            out
+            Create a giftcard by inputing the amount of Bitcoin <br/> you want to gift
           </p>
         </section>
 
