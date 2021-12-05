@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const {verify} = require('../../utils/jwt');
+const validate = require('../../utils/validate');
+
 const {
     listBusinessAddresses,
     listBusinessTransactions,
@@ -11,8 +14,8 @@ const {
 
 router.get('/listbusinessaddresses', listBusinessAddresses);
 router.get('/listbusinesstransactions', listBusinessTransactions);
-router.get('/sendbtctobusiness', sendBTCtoBusiness);
-router.post('/generatebtcaddress', generateBtcAddressBusiness);
+router.post('/sendbtctobusiness', verify, validate.sendBtc, sendBTCtoBusiness);
+router.post('/generatebtcaddress', verify, generateBtcAddressBusiness);
 
 
 module.exports = router;

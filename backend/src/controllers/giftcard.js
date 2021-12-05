@@ -76,7 +76,6 @@ async function verifyGiftcard(req, res) {
 
           // Send Response
           return res.status(200).json({ msg: 'Successfully claim giftcard' });
-
         } else {
           // Update User Balance
           await database('giftcard_balance')
@@ -97,12 +96,46 @@ async function verifyGiftcard(req, res) {
     }
   } catch (e) {
     return res
-    .status(401)
-    .json({ msg: 'Error occured while claiming giftcard' });
+      .status(401)
+      .json({ msg: 'Error occured while claiming giftcard' });
   }
 }
+
+async function listBusinessGiftcards(req, res) {
+  const user_id = req.user.id;
+
+  try {
+    // giftcard validations
+    const giftcards = await database('giftcard_logs').where({ user_id });
+
+    // Send Response
+    return res.status(200).json({ giftcards });
+  } catch (e) {
+    return res
+      .status(401)
+      .json({ msg: 'Error occured while listing giftcard' });
+  }
+}
+
+async function getBusinessBalance(req, res) {
+    const user_id = req.user.id;
+  
+    try {
+      // giftcard validations
+      const balance = await database('giftcard_balance').where({ user_id });
+  
+      // Send Response
+      return res.status(200).json({ balance });
+    } catch (e) {
+      return res
+        .status(401)
+        .json({ msg: 'Error occured while getting balance giftcard' });
+    }
+  }
 
 module.exports = {
   createGiftcard,
   verifyGiftcard,
+  listBusinessGiftcards,
+  getBusinessBalance,
 };
