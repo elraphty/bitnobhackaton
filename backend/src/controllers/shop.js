@@ -26,7 +26,7 @@ function listBusinessTransactions(req, res) {
      .catch(err => console.error('error:' + err));
 }
 
-function sendBTCtoBusiness(req, res) {
+async function sendBTCtoBusiness(req, res) {
 
 
      const  {satoshis, address, customerEmail }=req.body
@@ -34,6 +34,8 @@ function sendBTCtoBusiness(req, res) {
      service.CustomerSendBitcoin(satoshis, address, customerEmail)
      .then(res => res.json())
      .then(json => res.status(400).send(json.data))
+     .catch(err => console.error('error:' + err));
+
 }
 
 

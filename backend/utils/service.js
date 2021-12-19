@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 require('dotenv').config();
 
 const instance = async (url, method, data) => {
-  return await fetch(process.env.base_URL ,url, {
+  return await fetch(process.env.base_URL+url, {
     method: method,
     body: JSON.stringify(data),
     headers: {
