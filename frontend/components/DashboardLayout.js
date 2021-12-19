@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Icon, Menu, Segment, Sidebar } from 'semantic-ui-react';
 import styles from '../styles/dashboard.module.css';
 import DashHeader from './DashboardHeader';
+import Link from 'next/link';
 
 export default function DashboardLayout(props) {
   return (
@@ -14,10 +15,14 @@ export default function DashboardLayout(props) {
           vertical
           visible
           width="thin">
-          <Menu.Item as="a">
-            <Icon name="home" />
-            Home
-          </Menu.Item>
+          <Link href="/">
+            <a>
+              <Menu.Item as="a">
+                <Icon name="home" />
+                Home
+              </Menu.Item>
+            </a>
+          </Link>
         </Sidebar>
 
         <Sidebar.Pusher>
