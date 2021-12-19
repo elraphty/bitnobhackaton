@@ -1,5 +1,7 @@
 const fetch = require('node-fetch');
 const sdk = require('bitnob');
+const service = require('../../utils/service')
+
 require('dotenv').config();
 
 function listBusinessAddresses() {
@@ -40,8 +42,18 @@ function sendBTCtoBusiness(req, res) {
     .catch(err => console.error(err));
 }
 
+
+ function generateBtcAddressBusiness(req, res) {
+
+     const  {customerEmail}=req.body
+     service.CreateCustomerBitcoinAddress(customerEmail)
+     .then(res => res.json())
+     .then(json => res.status(400).send(json.data))
+    
+    }
 module.exports = {
     listBusinessAddresses,
     listBusinessTransactions,
     sendBTCtoBusiness,
+    generateBtcAddressBusiness
 }
