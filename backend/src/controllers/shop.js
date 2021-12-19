@@ -1,5 +1,4 @@
 const fetch = require('node-fetch');
-const sdk = require('bitnob');
 const service = require('../../utils/service')
 
 require('dotenv').config();
@@ -12,7 +11,7 @@ function listBusinessAddresses() {
 
 function listBusinessTransactions(req, res) {
     const customerID = req.headers.userid_id
-    const url = process.env.baseUrl + '/transactions/' + customerID;
+    const url = process.env.base_Url + '/transactions/' + customerID;
     const options = {
         method: 'GET',
         headers: {
@@ -29,17 +28,12 @@ function listBusinessTransactions(req, res) {
 
 function sendBTCtoBusiness(req, res) {
 
-   const  {satoshis, address, customerEmail }=req.body
 
-    sdk['send-bitcoin']({
-     satoshis: satoshis,
-     address: address,
-     customerEmail: customerEmail,
-     priorityLevel: 'regular'
-    }, 
-    {Authorization: `Bearer ${process.env.API_KEY}`})
-    .then(res => console.log(res))
-    .catch(err => console.error(err));
+     const  {satoshis, address, customerEmail }=req.body
+
+     service.CustomerSendBitcoin(satoshis, address, customerEmail)
+     .then(res => res.json())
+     .then(json => res.status(400).send(json.data))
 }
 
 
@@ -51,6 +45,8 @@ function sendBTCtoBusiness(req, res) {
      .then(json => res.status(400).send(json.data))
     
     }
+
+    
 module.exports = {
     listBusinessAddresses,
     listBusinessTransactions,

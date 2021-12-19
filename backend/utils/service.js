@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 require('dotenv').config();
 
 const instance = async (url, method, data) => {
-  return await fetch(process.env.base_URL + url, {
+  return await fetch(process.env.base_URL ,url, {
     method: method,
     body: JSON.stringify(data),
     headers: {
@@ -27,17 +27,32 @@ const CreateCustomer = async (name, email, phone) => {
   return instance('customers', 'POST', payload);
 };
 
-
-
 const CreateCustomerBitcoinAddress= (email)=>{
 
   payload = { 
       "label": "customer wallet",
       "customerEmail": email
   }
-return instance('addresses/generate ',"POST",payload)
+return instance('addresses/generate',"POST",payload)
+}
+
+const CustomerSendBitcoin= (satoshis,address,customerEmail)=>{
+
+  payload = {
+
+    satoshis: satoshis,
+
+    address: address,
+
+    customerEmail: customerEmail,
+
+    priorityLevel: "regular"
+
+}
+
+return instance('wallets/send_bitcoin',"POST",payload)
 }
 
 
 
-module.exports={CreateCustomer,CreateCustomerBitcoinAddress};
+module.exports={CreateCustomer,CreateCustomerBitcoinAddress,CustomerSendBitcoin};

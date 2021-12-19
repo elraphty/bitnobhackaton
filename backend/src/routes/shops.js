@@ -11,7 +11,7 @@ const {
 
 router.get('/listbusinessaddresses', listBusinessAddresses);
 router.get('/listbusinesstransactions', listBusinessTransactions);
-router.get('/sendbtctobusiness', sendBTCtoBusiness);
+router.post('/sendbtctobusiness', sendBTCtoBusiness);
 router.post('/generatebtcaddress', generateBtcAddressBusiness);
 
 
