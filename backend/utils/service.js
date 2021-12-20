@@ -1,47 +1,56 @@
 const fetch = require('node-fetch');
 require('dotenv').config();
 
-
-
-  
-
-const instance = async (url,method,data)=>{
-  return await fetch(process.env.base_URL+url, {
+const instance = async (url, method, data) => {
+  return await fetch(process.env.base_URL + url, {
     method: method,
     body: JSON.stringify(data),
-    headers: { 'Content-Type': 'application/json', "Authorization":`Bearer ${process.env.API_KEY}` }
-})
-}
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.API_KEY}`,
+    },
+  });
+};
 
+const CreateCustomer = async (name, email, phone) => {
+  payload = {
+    email: email,
 
+    firstName: name.split(' ')[0],
 
+    lastName: name.split(' ')[1],
 
-const CreateCustomer=  async(name,email,phone)=>{
+    phone: phone,
 
-    payload = { 
+    countryCode: '+234',
+  };
+  return instance('customers', 'POST', payload);
+};
 
-        "email": email,
-    
-        "firstName": name.split(' ')[0],
-    
-        "lastName": name.split(' ')[1],
-    
-        "phone":phone,
-    
-        "countryCode": "+234"
-    
-    }
- return instance('customers',"POST",payload)
-}
+const CreateCustomerBitcoinAddress = (email) => {
+  payload = {
+    label: 'customer wallet',
+    customerEmail: email,
+  };
+  return instance('addresses/generate', 'POST', payload);
+};
 
-const CreateCustomerBitcoinAddress= (email)=>{
+const CustomerSendBitcoin = (satoshis, address, customerEmail) => {
+  payload = {
+    satoshis: satoshis,
 
-  payload = { 
-      "label": "customer wallet",
-      "customerEmail": email
-  }
-return instance('addresses/generate ',"POST",payload)
-}
+    address: address,
 
+    customerEmail: customerEmail,
 
-module.exports={CreateCustomer,CreateCustomerBitcoinAddress};
+    priorityLevel: 'regular',
+  };
+
+  return instance('wallets/send_bitcoin', 'POST', payload);
+};
+
+module.exports = {
+  CreateCustomer,
+  CreateCustomerBitcoinAddress,
+  CustomerSendBitcoin,
+};

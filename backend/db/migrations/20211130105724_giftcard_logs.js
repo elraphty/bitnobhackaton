@@ -1,5 +1,5 @@
 exports.up = function (knex) {
-    return knex.schema.createTable('gitfcard_logs', (t) => {
+    return knex.schema.createTable('giftcard_logs', (t) => {
       t.increments('id').primary().notNullable();
       t.integer('user_id').notNullable().references('id').inTable('users');
       t.string('code').notNullable();
