@@ -27,17 +27,30 @@ const CreateCustomer = async (name, email, phone) => {
   return instance('customers', 'POST', payload);
 };
 
+const CreateCustomerBitcoinAddress = (email) => {
+  payload = {
+    label: 'customer wallet',
+    customerEmail: email,
+  };
+  return instance('addresses/generate', 'POST', payload);
+};
 
+const CustomerSendBitcoin = (satoshis, address, customerEmail) => {
+  payload = {
+    satoshis: satoshis,
 
-const CreateCustomerBitcoinAddress= (email)=>{
+    address: address,
 
-  payload = { 
-      "label": "customer wallet",
-      "customerEmail": email
-  }
-return instance('addresses/generate ',"POST",payload)
-}
+    customerEmail: customerEmail,
 
+    priorityLevel: 'regular',
+  };
 
+  return instance('wallets/send_bitcoin', 'POST', payload);
+};
 
-module.exports={CreateCustomer,CreateCustomerBitcoinAddress};
+module.exports = {
+  CreateCustomer,
+  CreateCustomerBitcoinAddress,
+  CustomerSendBitcoin,
+};

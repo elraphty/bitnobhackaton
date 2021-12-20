@@ -10,12 +10,13 @@ const {
     generateBtcAddressBusiness
 
 } = require('../controllers/shop')
+const {verify} = require('../../utils/jwt');
 
 
 router.get('/listbusinessaddresses', listBusinessAddresses);
 router.get('/listbusinesstransactions', listBusinessTransactions);
-router.post('/sendbtctobusiness', verify, validate.sendBtc, sendBTCtoBusiness);
-router.post('/generatebtcaddress', verify, generateBtcAddressBusiness);
+router.post('/sendbtctobusiness', verify, sendBTCtoBusiness);
+router.post('/generatebtcaddress', generateBtcAddressBusiness);
 
 
 module.exports = router;
